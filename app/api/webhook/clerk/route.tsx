@@ -3,6 +3,10 @@ import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import db from "@/lib/db";
 
+// This code defines a function called POST that handles a webhook request. It verifies the webhook payload using headers and a secret, and then performs different actions based on the type of event received.
+// If the event is "user.created", it creates a new user in the database.
+// If the event is "user.updated", it updates an existing user in the database.
+// If the event is "user.deleted", it deletes a user from the database. Finally, it returns a response with a status of 200.
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
@@ -61,8 +65,26 @@ export async function POST(req: Request) {
         imageURL: payload.data.image_url,
       },
     });
+  }
 
-    console.log(user);
+  if (eventType === "user.updated") {
+    await db.user.update({
+      where: {
+        externalUserId: payload.data.id,
+      },
+      data: {
+        username: payload.data.username,
+        imageURL: payload.data.image_url,
+      },
+    });
+  }
+
+  if (eventType === "user.deleted") {
+    await db.user.delete({
+      where: {
+        externalUserId: payload.data.id,
+      },
+    });
   }
 
   return new Response("", { status: 200 });
