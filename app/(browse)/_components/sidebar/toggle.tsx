@@ -39,7 +39,7 @@ const Toggle = () => {
 };
 export const ToggleSkeleton = () => {
   return (
-    <div className=" hidden lg:block p-3 pl-6 mb-2 flex items-center w-full justify-between">
+    <div className="hidden lg:flex p-4 pl-6 mb-2 items-center w-full justify-between">
       <p className="font-semibold text-primary">For you</p>
       <Skeleton className="h-6 w-6" />
     </div>
