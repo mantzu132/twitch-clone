@@ -5,6 +5,7 @@ import {
   UserItem,
   UserItemSkeleton,
 } from "@/app/(browse)/_components/sidebar/user-item";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface RecommendedProps {
   data: User[];
@@ -37,10 +38,15 @@ export const Recommended = ({ data }: RecommendedProps) => {
 
 export const RecommendedSkeleton = () => {
   return (
-    <ul className="px-2">
-      {[...Array(5)].map((_, i) => (
-        <UserItemSkeleton key={i} />
-      ))}
-    </ul>
+    <>
+      <div className="pl-6 mb-4">
+        <p className="text-sm text-muted-foreground">Recommended</p>
+      </div>
+      <ul className="px-2">
+        {[...Array(5)].map((_, i) => (
+          <UserItemSkeleton key={i} />
+        ))}
+      </ul>
+    </>
   );
 };

@@ -41,10 +41,9 @@ export const UserItem = ({ username, imageUrl, isLive }: UserItemProps) => {
             username={username}
             isLive={isLive}
             size="default"
-            showBadge={true}
           />
 
-          {!collapsed && <p>{username}</p>}
+          {!collapsed && <p className="truncate">{username}</p>}
 
           {!collapsed && isLive && <LiveBadge className="ml-auto" />}
         </div>
