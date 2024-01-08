@@ -13,7 +13,6 @@ import { ArrowLeftFromLine } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const Sidebar = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
   const recommended = await getRecommended();
 
   return (

@@ -39,7 +39,7 @@ export const Recommended = ({ data }: RecommendedProps) => {
 export const RecommendedSkeleton = () => {
   return (
     <>
-      <div className="pl-6 mb-4">
+      <div className="hidden lg:block pl-6 mb-4">
         <p className="text-sm text-muted-foreground">Recommended</p>
       </div>
       <ul className="px-2">
