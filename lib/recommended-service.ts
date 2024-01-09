@@ -1,15 +1,37 @@
 import { getUserfromDB } from "@/lib/auth-service";
 import db from "@/lib/db";
+import { User } from "@prisma/client";
 
 export const getRecommended = async () => {
   // await new Promise((resolve) => setTimeout(resolve, 3000));
-  const self = await getUserfromDB();
+  let LoggedInUserId;
+  try {
+    const LoggedInUser = await getUserfromDB();
+    LoggedInUserId = LoggedInUser?.id;
+  } catch {
+    LoggedInUserId = null;
+  }
 
-  const users = await db.user.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+  let users: User[] = [];
+
+  if (LoggedInUserId) {
+    users = await db.user.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      where: {
+        id: {
+          not: LoggedInUserId,
+        },
+      },
+    });
+  } else {
+    users = await db.user.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  }
 
   return users;
 };

@@ -12,12 +12,25 @@ generator client {
 }
 
 model User {
-  id             String  @id @default(uuid())
-  username       String  @unique
-  imageURL       String  @db.Text
-  bio            String? @db.LongText
-  externalUserId String  @unique // store id that clerk uses for that user
+  id             String   @id @default(uuid())
+  username       String   @unique
+  imageURL       String   @db.Text
+  bio            String?  @db.LongText
+  externalUserId String   @unique // store id that clerk uses for that user
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  followers Follow[] @relation("UserFollowers")
+  following Follow[] @relation("UserFollowing")
+}
+
+model Follow {
+  id          String @id @default(uuid())
+  followerId  String
+  followingId String
+  follower    User   @relation(name: "UserFollowers", fields: [followerId], references: [id])
+  following   User   @relation(name: "UserFollowing", fields: [followingId], references: [id])
+
+  @@index([followerId], name: "idx_follower")
+  @@index([followingId], name: "idx_following")
 }
