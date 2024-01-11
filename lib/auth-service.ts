@@ -1,7 +1,7 @@
 import { currentUser } from "@clerk/nextjs";
 import db from "@/lib/db";
 
-export const getUserfromDB = async () => {
+export const getCurrentUser = async () => {
   const self = await currentUser();
 
   if (!self || !self.username) {

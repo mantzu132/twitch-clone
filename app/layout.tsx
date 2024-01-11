@@ -4,6 +4,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
 import { dark } from "@clerk/themes";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
             disableTransitionOnChange
             storageKey="gamehub-theme"
           >
+            <Toaster theme="light" position="bottom-center" />
             <ClerkProvider appearance={{ baseTheme: dark }}>
               {children}
             </ClerkProvider>

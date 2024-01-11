@@ -1,4 +1,4 @@
-import { getUserfromDB } from "@/lib/auth-service";
+import { getCurrentUser } from "@/lib/auth-service";
 import db from "@/lib/db";
 import { User } from "@prisma/client";
 
@@ -6,7 +6,7 @@ export const getRecommended = async () => {
   // await new Promise((resolve) => setTimeout(resolve, 3000));
   let LoggedInUserId;
   try {
-    const LoggedInUser = await getUserfromDB();
+    const LoggedInUser = await getCurrentUser();
     LoggedInUserId = LoggedInUser?.id;
   } catch {
     LoggedInUserId = null;
