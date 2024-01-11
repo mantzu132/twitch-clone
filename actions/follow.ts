@@ -24,7 +24,7 @@ export const onUnfollow = async (id: string) => {
   try {
     const theUnfollow = await unfollowUser(id); // the returned (un)follow object
 
-    revalidatePath("/");
+    // revalidatePath("/");
 
     if (theUnfollow) {
       revalidatePath(`/${theUnfollow.following.username}`);

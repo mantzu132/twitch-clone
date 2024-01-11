@@ -11,7 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 interface UserItemProps {
   username: string;
   imageUrl: string;
-  isLive: boolean;
+  isLive?: boolean;
 }
 export const UserItem = ({ username, imageUrl, isLive }: UserItemProps) => {
   const pathname = usePathname();

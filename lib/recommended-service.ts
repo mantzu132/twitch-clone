@@ -20,9 +20,18 @@ export const getRecommended = async () => {
         createdAt: "desc",
       },
       where: {
-        id: {
-          not: LoggedInUserId,
-        },
+        NOT: [
+          {
+            id: LoggedInUserId,
+          },
+          {
+            following: {
+              some: {
+                followerId: LoggedInUserId,
+              },
+            },
+          },
+        ],
       },
     });
   } else {

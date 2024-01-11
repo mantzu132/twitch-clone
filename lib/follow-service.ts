@@ -113,3 +113,22 @@ export const unfollowUser = async (id: string) => {
 
   return follow;
 };
+
+// GET ALL OF THE USERS THAT THE CURRENT LOGGED IN USER IS FOLLOWING
+export const getFollowedUsers = async () => {
+  try {
+    const self = await getCurrentUser();
+
+    const followedUsers = db.follow.findMany({
+      where: {
+        followerId: self.id,
+      },
+      include: {
+        following: true,
+      },
+    });
+    return followedUsers;
+  } catch {
+    return [];
+  }
+};
