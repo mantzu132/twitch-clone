@@ -1,8 +1,5 @@
 "use server";
 
-import { getCurrentUser } from "@/lib/auth-service";
-import db from "@/lib/db";
-
 import { revalidatePath } from "next/cache";
 import { followUser, unfollowUser } from "@/lib/follow-service";
 
@@ -24,7 +21,7 @@ export const onUnfollow = async (id: string) => {
   try {
     const theUnfollow = await unfollowUser(id); // the returned (un)follow object
 
-    // revalidatePath("/");
+    revalidatePath("/");
 
     if (theUnfollow) {
       revalidatePath(`/${theUnfollow.following.username}`);

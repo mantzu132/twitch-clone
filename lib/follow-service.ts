@@ -1,6 +1,5 @@
 import { getCurrentUser } from "@/lib/auth-service";
 import db from "@/lib/db";
-import { getUserByUsername } from "@/lib/user-service";
 
 // IS THE CURRENT LOGGED IN USER FOLLOWING THIS OTHER USER WITH PROVIDED ID.
 export const isFollowingUser = async (id: string) => {
@@ -122,6 +121,13 @@ export const getFollowedUsers = async () => {
     const followedUsers = db.follow.findMany({
       where: {
         followerId: self.id,
+        following: {
+          Blocking: {
+            none: {
+              blockedId: self.id,
+            },
+          },
+        },
       },
       include: {
         following: true,
