@@ -17,8 +17,6 @@ const Sidebar = async () => {
   const recommended = await getRecommended();
   const followedUsers = await getFollowedUsers();
 
-  // console.log(followedUsers);
-
   return (
     <Wrapper>
       <Toggle />

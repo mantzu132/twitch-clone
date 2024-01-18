@@ -5,10 +5,11 @@ import {
   UserItem,
   UserItemSkeleton,
 } from "@/app/(browse)/_components/sidebar/user-item";
-import { Skeleton } from "@/components/ui/skeleton";
 
 interface RecommendedProps {
-  data: User[];
+  data: (User & {
+    Stream: { isLive: boolean } | null;
+  })[];
 }
 export const Recommended = ({ data }: RecommendedProps) => {
   const { collapsed } = useSidebar((state) => state);
@@ -28,7 +29,7 @@ export const Recommended = ({ data }: RecommendedProps) => {
             key={user.id}
             username={user.username}
             imageUrl={user.imageURL}
-            isLive={true}
+            isLive={user.Stream?.isLive}
           />
         ))}
       </ul>

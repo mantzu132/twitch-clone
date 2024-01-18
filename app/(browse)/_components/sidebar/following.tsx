@@ -7,9 +7,13 @@ import {
   UserItemSkeleton,
 } from "@/app/(browse)/_components/sidebar/user-item";
 
+// prettier-ignore
 interface FollowingProps {
-  data: (Follow & { following: User })[];
+  data: (Follow & {
+    following: User & {Stream: { isLive: boolean } | null };
+  })[];
 }
+
 export const Following = ({ data }: FollowingProps) => {
   const { collapsed } = useSidebar((state) => state);
   if (!data.length) {
@@ -28,6 +32,7 @@ export const Following = ({ data }: FollowingProps) => {
             key={follow.id}
             username={follow.following.username}
             imageUrl={follow.following.imageURL}
+            isLive={follow.following.Stream?.isLive}
           />
         ))}
       </ul>
