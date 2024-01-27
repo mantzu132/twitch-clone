@@ -1,6 +1,5 @@
-import { getCurrentUser } from "@/lib/auth-service";
 import { getUserByUsername } from "@/lib/user-service";
-import { Index, StreamPlayer } from "@/components/stream-player";
+import { StreamPlayer } from "@/components/stream-player";
 import { currentUser } from "@clerk/nextjs";
 
 interface CreatorPageProps {
