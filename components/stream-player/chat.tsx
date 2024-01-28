@@ -20,6 +20,7 @@ import {
   ChatList,
   ChatListSkeleton,
 } from "@/components/stream-player/chat-list";
+import { ChatCommunity } from "@/components/stream-player/chat-community";
 
 interface ChatProps {
   hostName: string;
@@ -91,7 +92,11 @@ export const Chat = ({
       )}
       {variant === ChatVariant.COMMUNITY && (
         <>
-          <p>Community Mode</p>
+          <ChatCommunity
+            isHidden={isHidden}
+            hostName={hostName}
+            viewerName={viewerName}
+          />
         </>
       )}
     </div>
@@ -99,7 +104,7 @@ export const Chat = ({
 };
 export const ChatSkeleton = () => {
   return (
-    <div className="flex flex-col border-l border-b pt-0 h-[calc(100vh-80px)] border-2">
+    <div className="flex flex-col h-full">
       <ChatHeaderSkeleton />
       <ChatListSkeleton />
       <ChatFormSkeleton />

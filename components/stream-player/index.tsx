@@ -2,11 +2,11 @@
 
 import { useViewerToken } from "@/hooks/use-viewer-token";
 import { LiveKitRoom } from "@livekit/components-react";
-import { Video } from "@/components/stream-player/video";
+import { Video, VideoSkeleton } from "@/components/stream-player/video";
 import { Stream, User } from "@prisma/client";
 import { useChatSidebar } from "@/store/use-chat-sidebar";
 import { cn } from "@/lib/utils";
-import { Chat } from "@/components/stream-player/chat";
+import { Chat, ChatSkeleton } from "@/components/stream-player/chat";
 import { ChatToggle } from "@/components/stream-player/chat-toggle";
 
 // type CustomStream = {
@@ -43,7 +43,7 @@ export const StreamPlayer = ({
   const { collapsed } = useChatSidebar((state) => state);
 
   if (!token || !name || !identity) {
-    return <div>Cannot watch stream</div>;
+    return <StreamPlayerSkeleton />;
   }
   return (
     <>
@@ -56,16 +56,16 @@ export const StreamPlayer = ({
         token={token}
         serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_WS_URL}
         className={cn(
-          "grid grid-cols-1 lg:gap-y-10 lg:grid-cols-3 2xl:grid-cols-6 h-full",
+          "grid grid-cols-1 lg:gap-y-10 lg:grid-cols-3 2xl:grid-cols-6 h-full auto-rows-min ",
           collapsed && "lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2",
         )}
       >
-        <div className="relative space-y-4 col-span-1 lg:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10">
+        <div className="relative col-span-1 lg:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar ">
           <Video hostName={user.username} hostIdentity={user.id} />
         </div>
         <div
           className={cn(
-            "col-span-1 bg-background max-h-full ",
+            "col-span-1 bg-background h-screen-minus-80",
             collapsed && "hidden",
           )}
         >
@@ -81,5 +81,19 @@ export const StreamPlayer = ({
         </div>
       </LiveKitRoom>
     </>
+  );
+};
+
+export const StreamPlayerSkeleton = () => {
+  return (
+    <div className="grid grid-cols-1 lg:gap-y-10 lg:grid-cols-3 2xl:grid-cols-6 h-full ">
+      <div className="relative space-y-4 col-span-1 lg:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar ">
+        <VideoSkeleton />
+      </div>
+
+      <div className="col-span-1 bg-background h-screen-minus-80">
+        <ChatSkeleton />
+      </div>
+    </div>
   );
 };
