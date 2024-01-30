@@ -17,7 +17,6 @@ export const Container = ({ children }: ContainerProps) => {
   // COLLAPSES SIDEBAR ON MOBILE AUTOMATICALLY, EXPANDS ON DESKTOP.
   const matches = useMediaQuery("(max-width: 1024px)");
 
-  // TODO: FIX HYDRATION ERRORS.
   useEffect(() => {
     if (matches) {
       onCollapse();

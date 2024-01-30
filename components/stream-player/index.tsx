@@ -8,6 +8,7 @@ import { useChatSidebar } from "@/store/use-chat-sidebar";
 import { cn } from "@/lib/utils";
 import { Chat, ChatSkeleton } from "@/components/stream-player/chat";
 import { ChatToggle } from "@/components/stream-player/chat-toggle";
+import { Header, HeaderSkeleton } from "@/components/stream-player/header";
 
 // type CustomStream = {
 //   id: string;
@@ -62,6 +63,15 @@ export const StreamPlayer = ({
       >
         <div className="relative col-span-1 lg:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar ">
           <Video hostName={user.username} hostIdentity={user.id} />
+
+          <Header
+            hostName={user.username}
+            hostIdentity={user.id}
+            viewerIdentity={identity}
+            hostImageUrl={user.imageURL}
+            isFollowing={isFollowing}
+            streamName={stream.name}
+          />
         </div>
         <div
           className={cn(
@@ -89,6 +99,7 @@ export const StreamPlayerSkeleton = () => {
     <div className="grid grid-cols-1 lg:gap-y-10 lg:grid-cols-3 2xl:grid-cols-6 h-full ">
       <div className="relative space-y-4 col-span-1 lg:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar ">
         <VideoSkeleton />
+        <HeaderSkeleton />
       </div>
 
       <div className="col-span-1 bg-background h-screen-minus-80">

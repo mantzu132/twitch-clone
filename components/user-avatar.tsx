@@ -5,7 +5,9 @@ import { LiveBadge } from "@/components/live-badge";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const avatarSizes = cva("", {
-  variants: { size: { default: "h-7 w-7", lg: "h-14 w-14" } },
+  variants: {
+    size: { default: "h-7 w-7", lg: "h-14 w-14", medium: "h-10 w-10" },
+  },
   defaultVariants: { size: "default" },
 });
 interface UserAvatarProps extends VariantProps<typeof avatarSizes> {
