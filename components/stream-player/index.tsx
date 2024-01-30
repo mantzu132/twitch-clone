@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { Chat, ChatSkeleton } from "@/components/stream-player/chat";
 import { ChatToggle } from "@/components/stream-player/chat-toggle";
 import { Header, HeaderSkeleton } from "@/components/stream-player/header";
+import { InfoCard } from "@/components/stream-player/info-card";
 
 // type CustomStream = {
 //   id: string;
@@ -71,6 +72,13 @@ export const StreamPlayer = ({
             hostImageUrl={user.imageURL}
             isFollowing={isFollowing}
             streamName={stream.name}
+          />
+
+          <InfoCard
+            hostIdentity={user.id}
+            viewerIdentity={identity}
+            streamName={stream.name}
+            thumbnailUrl={stream.thumbnailUrl}
           />
         </div>
         <div
