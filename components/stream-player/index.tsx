@@ -10,29 +10,30 @@ import { Chat, ChatSkeleton } from "@/components/stream-player/chat";
 import { ChatToggle } from "@/components/stream-player/chat-toggle";
 import { Header, HeaderSkeleton } from "@/components/stream-player/header";
 import { InfoCard } from "@/components/stream-player/info-card";
+import { AboutCard } from "@/components/stream-player/about-card";
 
-// type CustomStream = {
-//   id: string;
-//   isChatEnabled: boolean;
-//   isChatDelayed: boolean;
-//   isChatFollowersOnly: boolean;
-//   isLive: boolean;
-//   thumbnailUrl: string | null;
-//   name: string;
-// };
-//
-// type CustomUser = {
-//   id: string;
-//   username: string;
-//   bio: string | null;
-//   stream: CustomStream | null;
-//   imageUrl: string;
-//   _count: { followedBy: number };
-// };
+type CustomStream = {
+  id: string;
+  isChatEnabled: boolean;
+  isChatDelayed: boolean;
+  isChatFollowersOnly: boolean;
+  isLive: boolean;
+  thumbnailUrl: string | null;
+  name: string;
+};
+
+type CustomUser = {
+  id: string;
+  username: string;
+  bio: string | null;
+  Stream: CustomStream | null;
+  imageURL: string;
+  _count: { followers: number };
+};
 
 interface StreamPlayerProps {
-  user: User;
-  stream: Stream;
+  user: CustomUser;
+  stream: CustomStream;
   isFollowing: boolean;
 }
 export const StreamPlayer = ({
@@ -80,6 +81,14 @@ export const StreamPlayer = ({
             viewerIdentity={identity}
             streamName={stream.name}
             thumbnailUrl={stream.thumbnailUrl}
+          />
+
+          <AboutCard
+            hostName={user.username}
+            hostIdentity={user.id}
+            viewerIdentity={identity}
+            bio={user.bio}
+            followedByCount={user._count.followers}
           />
         </div>
         <div
