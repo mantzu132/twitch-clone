@@ -72,6 +72,7 @@ export const StreamPlayer = ({
             hostImageUrl={user.imageURL}
             isFollowing={isFollowing}
             streamName={stream.name}
+            streamThumbnailUrl={stream.thumbnailUrl}
           />
 
           <InfoCard

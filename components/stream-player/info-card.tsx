@@ -1,6 +1,8 @@
 "use client";
 import { Pencil } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { InfoModal } from "@/components/stream-player/info-modal";
+import Image from "next/image";
 
 interface InfoCardProps {
   hostIdentity: string;
@@ -33,6 +35,10 @@ export const InfoCard = ({
             Maximize your visibility
           </p>
         </div>
+        <InfoModal
+          initialName={streamName}
+          initialThumbnailUrl={thumbnailUrl}
+        />
       </div>
       <Separator />
 
@@ -47,11 +53,13 @@ export const InfoCard = ({
           </label>
           <div className="mt-1">
             <input
+              disabled
               type="text"
               name="name"
               id="name"
-              className="bg-gray-800 text-muted-foreground text-white block w-full border-gray-600 rounded-md p-2"
-              placeholder="mantas's stream"
+              className="bg-gray-800 text-muted-foreground text-white block w-full border-gray-600 rounded-md p-2
+              text-ellipsis"
+              placeholder={streamName}
             />
           </div>
         </div>
@@ -64,9 +72,19 @@ export const InfoCard = ({
           </label>
           {/*Thumbnail placeholder or upload field */}
           <div className="mt-1">
-            <div className="w-full h-24 bg-gray-800 rounded-md flex items-center justify-center text-muted-foreground">
-              {/*Replace this with an actual thumbnail or upload button*/}
-              Thumbnail placeholder
+            <div className="w-full h-32 bg-gray-800 rounded-md flex items-center justify-center text-muted-foreground ">
+              {thumbnailUrl ? (
+                <div className="relative w-[200px] aspect-video border-2 border-white/10 rounded-md">
+                  <Image
+                    className="object-cover rounded-sm"
+                    src={thumbnailUrl}
+                    alt="Gamehub logo"
+                    fill
+                  />
+                </div>
+              ) : (
+                <p>Thumbnail placeholder</p>
+              )}
             </div>
           </div>
         </div>

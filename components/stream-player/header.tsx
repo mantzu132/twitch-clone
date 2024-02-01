@@ -18,6 +18,7 @@ interface HeaderProps {
   hostImageUrl: string;
   isFollowing: boolean;
   streamName: string;
+  streamThumbnailUrl: string | null;
 }
 
 export const Header = ({
@@ -27,6 +28,7 @@ export const Header = ({
   hostImageUrl,
   isFollowing,
   streamName,
+  streamThumbnailUrl,
 }: HeaderProps) => {
   const isLargeScreen = useMediaQuery("(min-width: 1024px)");
   const avatarSize = isLargeScreen ? "lg" : "medium";
@@ -42,7 +44,7 @@ export const Header = ({
       <div className="py-4">
         <UserAvatar
           username={hostName}
-          imageUrl={hostImageUrl}
+          imageUrl={streamThumbnailUrl ? streamThumbnailUrl : hostImageUrl}
           isLive={true}
           showBadge={true}
           size={avatarSize}

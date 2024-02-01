@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { router } from "next/client";
+import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
 import { onFollow, onUnfollow } from "@/actions/follow";
 import { toast } from "sonner";
@@ -23,6 +23,7 @@ export const Actions = ({
 }: ActionsProps) => {
   const { userId } = useAuth();
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const handleUnfollow = () => {
     startTransition(() => {
@@ -60,12 +61,12 @@ export const Actions = ({
   }
 
   return (
-    // <ActionsSkeleton />
     <Button
       onClick={toggleFollow}
       variant="primary"
       size="sm"
       className="max-sm:basis-full"
+      disabled={isPending}
     >
       <Heart
         className={cn("h-4 w-4 mr-2", isFollowing ? "fill-white" : "fill-none")}

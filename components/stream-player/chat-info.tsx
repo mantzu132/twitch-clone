@@ -32,12 +32,16 @@ export const ChatInfo = ({ isFollowersOnly, isDelayed }: ChatInfoProps) => {
     }
   }, [isDelayed, isFollowersOnly]);
 
+  if (!label) {
+    return null;
+  }
+
   return (
     <div
       className="p-1 text-muted-foreground bg-white/5 border border-white/10 w-full rounded-t-md flex items-center
     gap-x-2"
     >
-      <Hint label={label}>
+      <Hint label={hint}>
         <Info className="h-4 w-4" />{" "}
       </Hint>
 
