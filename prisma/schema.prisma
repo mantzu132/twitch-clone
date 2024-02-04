@@ -21,8 +21,8 @@ model User {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
-  followers Follow[] @relation("UserFollowers")
-  following Follow[] @relation("UserFollowing")
+  followers Follow[] @relation("UserFollowing")
+  following Follow[] @relation("UserFollowers")
 
   Blocking  Block[] @relation("Blocking")
   BlockedBy Block[] @relation("BlockedBy")

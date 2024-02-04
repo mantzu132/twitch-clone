@@ -3,7 +3,6 @@ import db from "@/lib/db";
 import { User } from "@prisma/client";
 
 export const getRecommended = async () => {
-  // await new Promise((resolve) => setTimeout(resolve, 3000));
   let LoggedInUserId;
   try {
     const LoggedInUser = await getCurrentUser();
@@ -22,7 +21,7 @@ export const getRecommended = async () => {
             id: LoggedInUserId,
           },
           {
-            following: {
+            followers: {
               some: {
                 followerId: LoggedInUserId,
               },

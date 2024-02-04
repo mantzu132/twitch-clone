@@ -20,7 +20,7 @@ export const InfoCard = ({
   const hostAsViewer = `host-${hostIdentity}`;
   const isHost = viewerIdentity === hostAsViewer;
 
-  if (!isHost) null;
+  if (!isHost) return null;
 
   return (
     <div className="bg-background m-3 text-white rounded-lg p-4">

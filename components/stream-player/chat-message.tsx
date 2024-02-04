@@ -13,13 +13,13 @@ export const ChatMessage = ({ message }: ChatMessageProps) => {
   const color = message.from?.name ? stringToColor(message.from.name) : "gray";
 
   return (
-    <div className="flex items-center space-x-2 p-2 hover:bg-white/5">
+    <div className="flex items-center space-x-2 p-2 hover:bg-white/5 text-wrap text-ellipsis">
       <span className="text-sm text-gray-500">{formattedTime}</span>
       <div className="flex flex-wrap items-baseline gap-1 ">
         <span className="font-semibold" style={{ color }}>
           {message.from?.name || "Anonymous"}
         </span>
-        :<span className=" ">{message.message}</span>
+        :<p className="text-sm break-all ">{message.message}</p>
       </div>
     </div>
   );

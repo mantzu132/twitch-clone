@@ -19,6 +19,7 @@ interface HeaderProps {
   isFollowing: boolean;
   streamName: string;
   streamThumbnailUrl: string | null;
+  isLive: boolean;
 }
 
 export const Header = ({
@@ -29,6 +30,7 @@ export const Header = ({
   isFollowing,
   streamName,
   streamThumbnailUrl,
+  isLive,
 }: HeaderProps) => {
   const isLargeScreen = useMediaQuery("(min-width: 1024px)");
   const avatarSize = isLargeScreen ? "lg" : "medium";
@@ -40,12 +42,12 @@ export const Header = ({
   const participantLabel = participantCount === 1 ? "viewer" : "viewers";
 
   return (
-    <div className="p-3 lg:pl-5 flex items-center lg:flex-row gap-x-2.5 flex-wrap sm:flex-nowrap ">
+    <div className="p-3 lg:pl-5 flex items-center lg:flex-row gap-x-2.5 flex-wrap sm:flex-nowrap  ">
       <div className="py-4">
         <UserAvatar
           username={hostName}
           imageUrl={streamThumbnailUrl ? streamThumbnailUrl : hostImageUrl}
-          isLive={true}
+          isLive={isLive}
           showBadge={true}
           size={avatarSize}
         />

@@ -57,6 +57,7 @@ export const ChatForm = ({
         <ChatInfo isDelayed={isDelayed} isFollowersOnly={isFollowersOnly} />
         <Input
           onChange={(e) => onChange(e.target.value)}
+          disabled={isDisabled}
           value={value}
           placeholder="Send a message"
           className={cn(

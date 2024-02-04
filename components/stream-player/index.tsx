@@ -3,7 +3,6 @@
 import { useViewerToken } from "@/hooks/use-viewer-token";
 import { LiveKitRoom } from "@livekit/components-react";
 import { Video, VideoSkeleton } from "@/components/stream-player/video";
-import { Stream, User } from "@prisma/client";
 import { useChatSidebar } from "@/store/use-chat-sidebar";
 import { cn } from "@/lib/utils";
 import { Chat, ChatSkeleton } from "@/components/stream-player/chat";
@@ -41,6 +40,7 @@ export const StreamPlayer = ({
   stream,
   isFollowing,
 }: StreamPlayerProps) => {
+  console.log("user", user);
   const { token, name, identity } = useViewerToken(user.id);
 
   const { collapsed } = useChatSidebar((state) => state);
@@ -48,6 +48,7 @@ export const StreamPlayer = ({
   if (!token || !name || !identity) {
     return <StreamPlayerSkeleton />;
   }
+
   return (
     <>
       {collapsed && (
@@ -74,6 +75,7 @@ export const StreamPlayer = ({
             isFollowing={isFollowing}
             streamName={stream.name}
             streamThumbnailUrl={stream.thumbnailUrl}
+            isLive={stream.isLive}
           />
 
           <InfoCard

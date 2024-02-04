@@ -25,7 +25,7 @@ export const CommunityItem = ({
   const [isPending, startTransition] = useTransition();
 
   const handleBlock = async () => {
-    if (!participantName || isViewerHost || !isParticipantHost) return;
+    if (!participantName || !isViewerHost || isParticipantHost) return;
     try {
       startTransition(async () => {
         await onBlock(participantIdentity);
