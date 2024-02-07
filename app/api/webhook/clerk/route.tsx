@@ -2,6 +2,7 @@ import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import db from "@/lib/db";
+import { resetIngresses } from "@/actions/ingress";
 
 // This code defines a function called POST that handles a webhook request. It verifies the webhook payload using headers and a secret, and then performs different actions based on the type of event received.
 // If the event is "user.created", it creates a new user in the database.
@@ -84,6 +85,7 @@ export async function POST(req: Request) {
   }
 
   if (eventType === "user.deleted") {
+    await resetIngresses(payload.data.id);
     await db.user.delete({
       where: {
         externalUserId: payload.data.id,
