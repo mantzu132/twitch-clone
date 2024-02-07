@@ -16,7 +16,7 @@ const KeysPage = async () => {
   return (
     <div className="p-6">
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-2xl font-bold">Keys & URL's</h1>
+        <h1 className="text-2xl font-bold">Keys & URL&apos;s</h1>
         <ConnectModal />
       </div>
       <div className="space-y-4">

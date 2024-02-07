@@ -9,7 +9,7 @@ export const Results = async () => {
   const data = await getStreams();
   return (
     <div className="text-lg font-semibold mb-4">
-      <h2 className="mb-2">Streams we think you'll like</h2>
+      <h2 className="mb-2">Streams we think you&apos;ll like</h2>
 
       {data.length === 0 && (
         <div className="text-muted-foreground text-sm">No streams found.</div>
@@ -34,7 +34,7 @@ export const ResultsSkeleton = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
         {emptyArray.map(() => (
-          <ResultCardSkeleton />
+          <ResultCardSkeleton key={1} />
         ))}
       </div>
     </div>
