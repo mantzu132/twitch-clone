@@ -10,7 +10,7 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@clerk/nextjs": "^5.0.0-alpha-v5.0",
+    "@clerk/nextjs": "^4.29.1",
     "@clerk/themes": "^1.7.9",
     "@livekit/components-react": "^1.5.2",
     "@prisma/client": "^5.7.1",
